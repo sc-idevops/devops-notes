@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+#list of subscriptions
+sub=$(az account show --query "name")
 #Get List of Group Names and store in $grp
 grp=$(az group list -o tsv --query "[?name].name")
+
 
 #Iterate through array grp and output resources for that group name
 for g in $grp; do
