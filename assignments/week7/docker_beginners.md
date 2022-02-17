@@ -18,3 +18,9 @@ These are set up in layers identified by hashes. These are downloaded and assemb
 These are actual image files that can be moved around
 an image is a running container environment
 
+##Comparison vs Virtual Machine
+an OS has two layers, kernel and application.
+docker images have only 1 layer to deal with and therefore are smaller and start faster than a traditional VM which needs to use both layers.
+VMs can be run anywhere, whereas docker images cant
+
+
