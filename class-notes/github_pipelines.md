@@ -30,4 +30,3 @@ customize the templates for your needs.
 ## GitHub Pipelines
 **when you set up a technology for the _first_ time, you need to merge your branch into master/main so github knows to set up a pipeline for it**
 
-
