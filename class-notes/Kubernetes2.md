@@ -40,5 +40,4 @@ data:
 ```
 
 We're also going to need volume mounts under the container spec.
-TODO: rip that from his template haproxy on github
-
+https://github.com/iDevOps-io/vaas/blob/d40453649b57d58e700456ac7e7c8c44f277f866/manifests/haproxy/deployment.yaml.template
