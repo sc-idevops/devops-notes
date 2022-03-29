@@ -49,4 +49,5 @@ ALWAYS RUN TERRAFORM PLAN FIRST.
 Check if you're going to create something if you intend to. (green plus signs)
 If you see red minus signs and you didn't want to delete something, something has gone wrong!
 `terraform apply` will apply the plan you just created.
+**RUN TERRAFORM DESTROY AFTER TESTING**
 
