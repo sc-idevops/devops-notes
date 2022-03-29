@@ -1,3 +1,18 @@
+##Bash Functions
+function-name() {
+  echo "your commands"
+
+}
+
+just call the function by name when you want to use it
+
+its recommended to echo variables at some point in the script to help with debugging and so the user can follow along with the script's workings
+
+##Passing Values to Bash Functions
+
+values are numerical and positional. $1, $2, just like parameters for the script
+
+### etc
 ##hidden characters and hating life
 sometimes different line endings between windows/unix can cause issues in your script
 `:set list` allows you to view hidden characters
