@@ -51,3 +51,48 @@ If you see red minus signs and you didn't want to delete something, something ha
 `terraform apply` will apply the plan you just created.
 **RUN TERRAFORM DESTROY AFTER TESTING**
 
+# Terraform Deployments
+To run your terraform file, there is only 1 pipeline with catalog items
+Provide the following:
+* terraform template: name of the folder name
+* what terraform action to do
+
+There's an AWS catalog and an Azure catalog.
+Note the folder name must be consistent across all of our directories.
+
+**ALL TECH NEEDS TO BE UPDATED SO TERRAFORM DESTROY CAN RUN CORRECTLY**
+
+```
+terraform {
+  backend "azurerm" {
+    container_name       = "terraformbackend"
+    storage_account_name = "idevopsioterraform"
+    resource_group_name  = "idevopsio-aks"
+    key                  = "terraformbackend"
+  }
+
+  required_providers {
+    azuredevops = {
+      source = "microsoft/azuredevops"
+      version = "=0.1.7"
+    }
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "=2.98.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+```
+## Terraform Variables
+declare variables in vars.tf with:
+`variable "name" { }`
+reference variables in main.tf with:
+`name = var.name`
+
+vars.json contains all variables with `TF_VAR_variableName`
+the json file contains the variable values, and the vars.tf just declares them.
+
