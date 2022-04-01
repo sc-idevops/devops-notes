@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Create User
+      user: 
+        name: stevec
+        password: $6$2BgApPMchVNoFuXe$EQfKfCX3n..payKPzTUBI8.A9.sj0Ja4TicuRpLQgbrhGhQ9j49YPTI7AnBSUFfB8uVIFcTcUTLIdxdG5dBBF1
+        state: present
