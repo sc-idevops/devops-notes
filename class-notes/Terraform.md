@@ -95,4 +95,6 @@ reference variables in main.tf with:
 
 vars.json contains all variables with `TF_VAR_variableName`
 the json file contains the variable values, and the vars.tf just declares them.
+----------------
+
 
