@@ -26,14 +26,14 @@ By planning things out, we can avoid problems before they happen
 
 Change Management: Identifying when bugs happen in code
 
----------------
-
 ## Monitoring Tools
 Application Performance Monitoring: Intrusive Detailed Monitoring of processes running on your machines.
 
 User Monitoring: Collecting information on what our users are doing and what their experience is like.
 
 Error Budgets: If you go over this, you're fired (jk)
+
+---------------
 
 # Homework:
 
