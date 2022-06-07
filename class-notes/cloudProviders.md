@@ -94,3 +94,29 @@ EKS manages all the kubernetes stuff, you just specify what nodes to run what.
 
 Server-less running of applications. E.g. a java application that runs only when invoked (based on events)
 *server-less in this sense means that you don't specify anything about what system it's running on, it's some computer somewhere doing the work*
+
+#### AWS Storage
+
+S3: Storage! You can put anything here. Its literally cloud storage.
+
+- Key value storage into things called buckets
+- S3 Glacier is used for infrequently accessed data at a lower price
+
+finally something we don't have to worry about security groups (but you can set access controls)
+
+#### Elasti-cache
+
+Redis on AWS (in memory caching service)
+Caching things in memory so things go faster!
+
+like everything else these also use security groups etc.
+
+#### DynamoDB
+
+flat DB helpful for locking access to files like your terraform thing.
+
+### AWS Security
+
+IAM Permissions are not fun. They can be set for anything. 
+
+## Azure Cloud Services
