@@ -41,7 +41,7 @@ Storage: how much space you need? There are different types:
 - GP3 is the best SSD drives
 - provisioned IOPS (input/output per second) can specify a threshhold of speed needed.
 
-### AWS Console
+### AWS Services
 
 - Spot instance: rented for an unknown time for a low price. you can rent unnused compute resources.
 - Availability Zones: AWS has multiple datacenters all over the world.
@@ -50,8 +50,47 @@ Storage: how much space you need? There are different types:
 - IAM Role: Permissions in AWS
 - Lifecycle Management: removal of old snapshots, etc.
 - When snapshotting, ensure you check the "no reboot" option.
-  - Public IPs are not static and can change upon rebooting. 
+  - Public IPs are not static and can change upon rebooting.
   - Elastic IPs are static ip address that can be assigned to compute resources to remedy this problem.
 - Auto Scaling Groups: compute resources in these grow with your needs. additional instances are launched based on a set of rules.
-  - Launch Templates indicate these rules. Min/Max numbers, availability zones, etc. 
+  - Launch Templates indicate these rules. Min/Max numbers, availability zones, etc.
 - Load Balancers: these balance network traffic between multiple backend points. round robin is the typical approach (iterate through list)
+
+#### Route 53
+
+- AWS's Hosted DNS server. DNS as a Service!
+- dig command = DNS lookup
+
+#### RDS
+
+Amazon's Database as a service. Available in multiple types.
+Amazon's Aurora is MySQL but 30% faster
+These also need security groups, network/subnets, etc. Connection issues? Start here!
+
+snapshot = backup for AWS things
+AWS actions can take a long time to process.
+
+#### SQS - Simple Queue Service
+
+Amazon's Message Queue System.
+You queue an action on a website for consistent data. This is why your facebook post might not show up immediately.
+No system on the planet can process millions of requests a second, so this system creates events that are later processed by your system.
+These "messages" are typically JSON payloads that get processed.
+
+#### SES - Simple Email Service
+
+AWS email as a service.
+This can be used to send large volumes of outbound email, like those promotional messages we all hate.
+
+#### ECS & EKS - Elastic Container Service and Elastic Kubernetes Service
+
+Docker & Kubernetes in AWS!
+These docker-like images run server-less (anywhere)
+Elastic Container Registry is like AWS's Dockerhub
+
+EKS manages all the kubernetes stuff, you just specify what nodes to run what.
+
+#### Lambda
+
+Server-less running of applications. E.g. a java application that runs only when invoked (based on events)
+*server-less in this sense means that you don't specify anything about what system it's running on, it's some computer somewhere doing the work*
