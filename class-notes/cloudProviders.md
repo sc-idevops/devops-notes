@@ -56,7 +56,7 @@ Storage: how much space you need? There are different types:
 - IAM Role: Permissions in AWS
 - Lifecycle Management: removal of old snapshots, etc.
 - When snapshotting, ensure you check the "no reboot" option.
-- IP Addresses: 
+- IP Addresses:
   - Public IPs are not static and can change upon rebooting.
   - Elastic IPs are static ip address that can be assigned to compute resources to remedy this problem.
 - Auto Scaling Groups: compute resources in these grow with your needs. additional instances are launched based on a set of rules.
@@ -137,7 +137,7 @@ Your website will be distributed and accessible from multiple locations. "server
 
 #### Amazon Cloudwatch
 
-AWS's attempt at monitoring resources. Alerts can be set up for various criteria. 
+AWS's attempt at monitoring resources. Alerts can be set up for various criteria.
 Biggest Limitation is no agents run automatically on machines
 
 There are better tools out there though:
@@ -154,6 +154,28 @@ Track user activity and API usage.
 
 ### AWS Security
 
-IAM Permissions are not fun. They can be set for anything.
+IAM Permissions are not fun. They can be set for anything in AWS from user logins to permissions between instances to permissions to access an object in S3/Cloudfront, etc.
 
-## Azure Cloud Services
+Categories (hierarchical. Users get roles which get policies)
+- Users
+- Roles (like groups)
+- Policies
+
+This is called Federated Access Management (similar to AD) or LDAP.
+
+For security we want to limit credentials. You can assign a role to an EC2 instance instead of putting hard credentials on it.
+
+therefore, Credential-less permissions in AWS are controlled through roles
+
+Example: Setting up our github action pipelines to use an IAM role instead of using the secrets as we currently do.
+
+Cross Account Authentication:  2 Separate AWS Accounts can have access to do things in another account without needing to login to that other account using roles.
+- You’re more than likely to use AWS Service or AWS Account
+- SAML 2.0 Federation is for Oauth
+- Custom ones are available should you need it
+
+Note, these policy actions aren’t readily available if you are building a policy from scratch, however they are at least named in English words.
+
+Thankfully Amazon does have a lot of pre-built policies available in an easily accessible 49 pages of them! (use the filter)
+
+Youtube Amazon AWS IAM Permissions: (provide links)
