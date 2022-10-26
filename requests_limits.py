@@ -8,7 +8,7 @@ def execute_kube_command_json(command):
     json_object = json.loads(json_output)
     return json_object
 
-audit_report_probes = {}
+audit_report = {}
 command = "kubectl get namespaces -o json"
 json_object = execute_kube_command_json(command)
 number_of_namespaces = len(json_object["items"])
@@ -20,7 +20,7 @@ for namespace in json_object["items"]:
     namespace_name=namespace["metadata"]["name"]
     command = "kubectl get pods -n {namespace} -o json".format(namespace=namespace_name)
     json_object = execute_kube_command_json(command)
-    audit_report_probes[namespace_name] = {}
+    audit_report[namespace_name] = {}
     if not json_object["items"]:
         processed_namespace_count += 1
         process_end = dt.datetime.now()
@@ -33,26 +33,32 @@ for namespace in json_object["items"]:
         continue
     else:
         for pod in json_object["items"]:
-            audit_report_probes[namespace_name][pod["metadata"]["name"]] = {}
+            audit_report[namespace_name][pod["metadata"]["name"]] = {}
             for container in pod["spec"]["containers"]:
-                audit_report_probes[namespace_name][pod["metadata"]["name"]][container["name"]] = {}
-                if "requests" in container and "limits" in container:
-                    audit_report_probes[namespace_name][pod["metadata"]["name"]][container["name"]] = {
-                        "requests": "present",
-                        "limits": "present"
-                    }
-                elif "limits" in container and "requests" not in container:
-                    audit_report_probes[namespace_name][pod["metadata"]["name"]][container["name"]] = {
-                        "requests": "not present",
-                        "limits": "present"
-                    }
-                elif "limits" not in container and "requests" in container:
-                    audit_report_probes[namespace_name][pod["metadata"]["name"]][container["name"]] = {
-                        "requests": "present",
-                        "limits": "not present"
-                    }
+                audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {}
+                if "resources" in container:
+                    if "requests" in container["resources"] and "limits" in container["resources"]:
+                        audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {
+                            "requests": "present",
+                            "limits": "present"
+                        }
+                    elif "limits" in container["resources"] and "requests" not in container["resources"]:
+                        audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {
+                            "requests": "not present",
+                            "limits": "present"
+                        }
+                    elif "limits" not in container["resources"] and "requests" in container["resources"]:
+                        audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {
+                            "requests": "present",
+                            "limits": "not present"
+                        }
+                    else:
+                        audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {
+                            "requests": "not present",
+                            "limits": "not present"
+                        }
                 else:
-                    audit_report_probes[namespace_name][pod["metadata"]["name"]][container["name"]] = {
+                    audit_report[namespace_name][pod["metadata"]["name"]][container["name"]] = {
                         "requests": "not present",
                         "limits": "not present"
                     }
@@ -65,4 +71,4 @@ for namespace in json_object["items"]:
     else:
         print(how_long_to_finish, "minutes")
 
-print(audit_report_probes)
+print(audit_report)
