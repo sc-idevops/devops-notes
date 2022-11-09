@@ -6,7 +6,7 @@ HELM_INSTALL_NAME=redis
 
 echo "add helm repo & install"
 helm repo add ${CHART_REPO_NAME} ${CHART_REPO_URL}
-helm install ${HELM_INSTALL_NAME} ${CHART_REPO_NAME}/${CHART_NAME} -n ${NAMESPACE} --create-namespace
+helm install ${HELM_INSTALL_NAME} ${CHART_REPO_NAME}/${CHART_NAME} -n ${NAMESPACE} --create-namespace -f values.yaml
 
 echo "install python dependencies"
 pip3 install redis
