@@ -1,6 +1,7 @@
 # users/urls.py
 from django.urls import path
 from .views import home, SignUp, think, like, delete
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', home, name = "home"),
@@ -10,3 +11,4 @@ urlpatterns = [
     path("delete", delete, name="delete"),
 
 ]
+urlpatterns += staticfiles_urlpatterns()

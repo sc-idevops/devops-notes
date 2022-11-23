@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thoughts-scard
+  namespace: thoughts-scard
+  labels:
+    app: thoughts-scard
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: thoughts-scard
+  template:
+    metadata:
+      labels:
+        app: thoughts-scard
+    spec:
+      containers:
+      - name: thoughts-scard
+        image: stephencard/thoughts:v1.2
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: thoughts-scard
+  name: thoughts-scard
+spec:
+  selector:
+    app: thoughts-scard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer

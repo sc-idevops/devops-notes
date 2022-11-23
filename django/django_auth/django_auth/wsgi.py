@@ -10,7 +10,12 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+from django.conf import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_auth.settings')
-
-application = get_wsgi_application()
+if settings.DEBUG:
+    application = StaticFilesHandler(get_wsgi_application())
+else:
+    application = StaticFilesHandler(get_wsgi_application())
+    #application = get_wsgi_application()
