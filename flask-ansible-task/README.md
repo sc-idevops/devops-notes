@@ -10,4 +10,4 @@ You'll have to bring your own pem file :P
 
 - ansible:
   - put public IP into the .hosts file
-  - execute playbook: `ansible-playbook -i .hosts <name of playbook>`
+  - execute playbook: `ansible-playbook -i .hosts deploy.yml`
