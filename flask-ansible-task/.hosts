@@ -1,5 +1,5 @@
 [all]
-node1 ansible_host=35.87.163.207 ansible_port=22 ansible_user=ubuntu
+node1 ansible_host=35.87.248.10 ansible_port=22 ansible_user=ubuntu
 
 [all:vars]
 # Local variables for Ansible playbooks

@@ -5,28 +5,28 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket         = "idevops-terraform-backend"
-    key            = "global/s3/eks.tfstate"
+    key            = "global/s3/eks_scard.tfstate"
     region         = "us-east-2"
     dynamodb_table = "terraform_state_locking"
     encrypt        = true
   }
 }
 
-resource "aws_instance" "ec2_in" {
+resource "aws_instance" "ec2_in_scard" {
   ami           = "ami-03f8756d29f0b5f21"
     key_name = "padawan"
   instance_type = "t3.micro"
   tags = {
     Name = "scard"
   }
-  vpc_security_group_ids = [aws_security_group.allow_ssh_scard.id]
+  vpc_security_group_ids = [aws_security_group.allow_ssh_scards.id]
 }
 
 output "ec2_ip" {
-  value = aws_instance.ec2_in.public_ip
+  value = aws_instance.ec2_in_scard.public_ip
 }
 
-resource "aws_security_group" "allow_ssh_scard" {
+resource "aws_security_group" "allow_ssh_scards" {
   name        = "allow_ssh_scard"
   description = "Allow SSH inbound traffic"
   vpc_id      = "vpc-0cbb666e4acbb30c7"
