@@ -1,0 +1,9 @@
+[all]
+node1 ansible_host=35.87.163.207 ansible_port=22 ansible_user=ubuntu
+
+[all:vars]
+# Local variables for Ansible playbooks
+ansible_ssh_private_key_file=./aws-ec2.pem
+ansible_ssh_user=ubuntu
+github_user=D-Rex-III
+app_name=flask-ansible-task
