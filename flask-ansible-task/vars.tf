@@ -1,6 +1,6 @@
-variable "appName" {
+variable "app_name" {
   type = string
-    default = "scard"
+    default = "scard-ansible-task"
 }
 
 variable "port" {
@@ -10,7 +10,12 @@ variable "port" {
 
 variable "subnets" {
   type = list
-    default = ["subnet-0357bbe188bd1e4c8", "subnet-04ee363ec3c8a8fef", "subnet-075293e11cc798803"]
+    default = ["subnet-0357bbe188bd1e4c8", "subnet-03ec22f87490c8dda"]
+}
+
+variable "availabilityZones" {
+  type = string
+    default = "us-west-2a"
 }
 
 variable "hcstatuscode" {
