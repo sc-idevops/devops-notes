@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket         = "idevops-terraform-backend"
-    key            = "global/s3/david.tfstate"
+    key            = "global/s3/scard.tfstate"
     region         = "us-east-2"
     dynamodb_table = "terraform_state_locking"
     encrypt        = true
@@ -16,15 +16,15 @@ resource "aws_instance" "ec2_in" {
   ami                    = "ami-03f8756d29f0b5f21"
   key_name               = "padawan"
   instance_type          = "t3.micro"
-  vpc_security_group_ids = [aws_security_group.allow_ssh_rex.id]
+  vpc_security_group_ids = [aws_security_group.allow_ssh_scard.id]
 
   tags = {
-    Name = "David-Rex"
+    Name = "scard"
   }
 }
 
-resource "aws_security_group" "allow_ssh_rex" {
-  name        = "allow_ssh_rex"
+resource "aws_security_group" "allow_ssh_scard" {
+  name        = "allow_ssh_scard"
   description = "Allow ssh inbound traffic"
   vpc_id      = "vpc-0cbb666e4acbb30c7"
 
@@ -46,12 +46,12 @@ resource "aws_security_group" "allow_ssh_rex" {
   }
 
   tags = {
-    Name = "allow_ssh_rex"
+    Name = "allow_ssh_scard"
   }
 }
 
-resource "aws_security_group" "allow_http_rex" {
-  name        = "allow_http_rex"
+resource "aws_security_group" "allow_http_scard" {
+  name        = "allow_http_scard"
   description = "Allow http inbound traffic"
   vpc_id      = "vpc-0cbb666e4acbb30c7"
 
@@ -73,7 +73,7 @@ resource "aws_security_group" "allow_http_rex" {
   }
 
   tags = {
-    Name = "allow_http_rex"
+    Name = "allow_http_scard"
   }
 }
 
@@ -82,7 +82,7 @@ resource "aws_lb" "lb" {
   internal                   = false
   ip_address_type            = "ipv4"
   load_balancer_type         = "application"
-  security_groups            = [aws_security_group.allow_http_rex.id]
+  security_groups            = [aws_security_group.allow_http_scard.id]
   subnets                    = var.subnets
   enable_deletion_protection = false
   tags = {
@@ -132,7 +132,7 @@ resource "aws_lb_target_group_attachment" "lb-attachment" {
 
 resource "aws_route53_record" "www" {
   zone_id         = var.hostedZone
-  name            = "david.idevops.io"
+  name            = "scard.idevops.io"
   type            = "CNAME"
   ttl             = 60
   records         = [aws_lb.lb.dns_name]

@@ -1,6 +1,6 @@
 variable "appName" {
   type = string
-    default = "david-rex"
+    default = "scard"
 }
 
 variable "port" {
